@@ -1,0 +1,157 @@
+/*-------------------GENERAL-------------------*/
+
+body {
+	background-color:rgb(224, 212, 192);
+    color:rgb(31, 43, 63);
+	margin:0px;
+	font-family: Montserrat, verdana, arial;
+}
+
+#contenedor {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+/*-------------------HEADER-------------------*/
+
+header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#logoyslogan {
+	display: flex;
+	flex-direction: row;
+}
+
+.logo {
+	width: auto;
+	height: 100px;
+	padding: 5px;
+}
+
+#slogan {
+	width: auto;
+	height: 85px;
+	padding: 20px;
+}
+
+#buscadorymenu {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+#buscador {
+	height: 30px;
+	margin-top: 10px;
+	padding-left: 5px;
+	border-radius: 10px;
+	border-color: rgb(31, 43, 63);
+}
+
+#nav {
+	display: flex;
+	flex-direction: row;
+	padding-left: 0;
+	flex-wrap: wrap;
+}
+
+#nav li {
+	list-style: none;
+	border: 1px solid rgb(31, 43, 63);
+	width: 200px;
+	display: flex;
+	justify-content: center;
+}
+
+#nav li:hover {
+	background-color:rgb(224, 212, 192);
+	border-color: rgb(224, 212, 192);
+	filter: invert();
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+	display: flex;
+	flex-direction: row;
+}
+
+.logos {
+	width: 25px;
+	height: 25px;
+	padding-top: 10px;
+	display: flex;
+	flex-direction: row;
+}
+
+/*-------------------PRODUCTOS-------------------*/
+
+#productos-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	padding: 20px;
+}
+
+#productos-container div {
+	border: 1px solid rgb(31, 43, 63);
+	border-radius: 8px;
+	padding: 10px;
+	margin: 16px;
+	text-align: center;
+}
+
+.imgProductos {
+	width: 200px;
+	height: 270px;
+	border-radius: 8px;
+}
+
+#productos-container div button {
+	display: flex;
+    flex-direction: row;
+    margin: auto;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    font-size: 20px;
+    border: 1px solid rgb(31, 43, 63);
+    border-radius: 2px;
+    background-color: rgb(224, 212, 192);
+}
+
+#productos-container div button:hover {
+	background-color: rgb(224, 212, 192);
+	border-color: rgb(224, 212, 192);
+	filter: invert();
+}
+
+.carritodeCompras {
+	width: 20px;
+	height: 20px;
+	margin: 5px;
+}
+
+/*-------------------FOOTER-------------------*/
+
+#redes {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	justify-content: center;
+}
+
+#redes a li {
+	list-style: none;
+	padding: 25px;
+}
+
+#redes a li:hover {
+	transform: scale(1.5);
+}
