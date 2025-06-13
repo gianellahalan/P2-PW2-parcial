@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
-import styles from "./Register.module.css";
+import styles from "./RegisterLogin.module.css";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
@@ -33,14 +33,14 @@ function Register() {
         const data = JSON.parse(text);
 
         if (res.ok) {
-          alert("✅ Registro exitoso");
-          navigate("/login"); // redirige al login
+          localStorage.setItem("token", data.token);
+          navigate("/productos");
         } else {
           setError(data?.mensaje || "❌ No se pudo registrar");
         }
       } catch (err) {
         console.error("Error al parsear JSON:", err);
-        setError("❌ Error inesperado del servidor");
+        setError("❌ Error interno del servidor");
       }
     } catch (err) {
       console.error("Error en el fetch:", err);

@@ -26,9 +26,9 @@ const agregarAlCarrito = async (productoId) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`, // El backend debería leer el usuario del JWT
+        "Authorization": `Bearer ${token}`,
       },
-      body: JSON.stringify({ productoId }), // O { idProducto: productoId } si así lo espera el backend
+      body: JSON.stringify({ productoId }), 
     });
 
     const data = await res.json();
@@ -37,7 +37,7 @@ const agregarAlCarrito = async (productoId) => {
       throw new Error(data?.mensaje || "Error al agregar al carrito");
     }
 
-    alert("🛒 Producto agregado al carrito");
+    alert("Producto agregado al carrito");
   } catch (error) {
     console.error("Error al agregar al carrito:", error);
     alert("❌ No se pudo agregar al carrito");

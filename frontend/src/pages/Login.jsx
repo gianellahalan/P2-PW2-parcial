@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Login.module.css";
+import styles from "./RegisterLogin.module.css";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 
 function Login() {
