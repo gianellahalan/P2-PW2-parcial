@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./Productos.module.css";
+import styles from "../styles/Productos.module.css";
 
 function Productos() {
   const [productos, setProductos] = useState([]);
@@ -10,7 +10,7 @@ function Productos() {
     fetch("http://localhost:3000/api/productos")
       .then(res => res.json())
       .then(data => setProductos(data))
-      .catch(() => setError("❌ No se pudieron cargar los productos"));
+      .catch(() => setError("No se pudieron cargar los productos"));
   }, []);
 
 const agregarAlCarrito = async (productId) => {
@@ -40,7 +40,7 @@ const agregarAlCarrito = async (productId) => {
     alert("Producto agregado al carrito");
   } catch (error) {
     console.error("Error al agregar al carrito:", error);
-    alert("❌ No se pudo agregar al carrito");
+    alert("No se pudo agregar al carrito");
   }
 };
 

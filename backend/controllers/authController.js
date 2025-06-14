@@ -34,7 +34,15 @@ const login = async (req, res, next) => {
       { expiresIn: '1h' }
     );
 
-    res.json({ token });
+    // Envía token y datos básicos del usuario con rol
+    res.json({ 
+      token,
+      user: {
+        id: user._id,
+        email: user.email,
+        rol: user.rol
+      }
+    });
   } catch (err) {
     next(err);
   }

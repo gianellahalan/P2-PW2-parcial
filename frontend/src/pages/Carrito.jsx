@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Alert, Button } from "react-bootstrap";
-import styles from "./Carrito.module.css";
+import styles from "../styles/Carrito.module.css";
 
 function Carrito() {
   useEffect(() => {

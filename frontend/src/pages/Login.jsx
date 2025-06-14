@@ -1,18 +1,20 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./RegisterLogin.module.css";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import styles from "../styles/RegisterLogin.module.css";
+import useAuthStore from "../store/authStore";
 
 function Login() {
-    useEffect(() => {
-  document.title = "Iniciar sesión";
-}, []);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+  const { setUserAndToken } = useAuthStore();
+
+  useEffect(() => {
+    document.title = "Iniciar sesión";
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,15 +24,25 @@ function Login() {
       const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
+      console.log("Respuesta del login:", data);
+      console.log("Usuario:", data.user);
+      console.log("Rol:", data.user?.rol);
 
       if (!response.ok) throw new Error(data.message || "Error al iniciar sesión");
 
+      setUserAndToken(data.user, data.token);
       localStorage.setItem("token", data.token);
-      navigate("/productos");
+
+      // ✅ Validación segura del rol
+      if (data.user?.rol === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/productos");
+      }
     } catch (err) {
       setError(err.message);
     }
@@ -43,29 +55,28 @@ function Login() {
           <h2>Iniciar Sesión</h2>
 
           <Form onSubmit={handleLogin}>
-          
             {error && <Alert variant="danger">{error}</Alert>}
-          
+
             <Form.Group className={styles.labelEinput}>
               <Form.Label className={styles.label}>Email</Form.Label>
-              <Form.Control 
-                type="email" 
-                placeholder="Ingresa tu email" 
+              <Form.Control
+                type="email"
+                placeholder="Ingresa tu email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required 
+                required
                 className={styles.input}
               />
             </Form.Group>
 
             <Form.Group className={styles.labelEinput}>
               <Form.Label className={styles.label}>Contraseña</Form.Label>
-              <Form.Control 
-                type="password" 
-                placeholder="Ingresa tu contraseña" 
+              <Form.Control
+                type="password"
+                placeholder="Ingresa tu contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required 
+                required
                 className={styles.input}
               />
             </Form.Group>

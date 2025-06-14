@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
-import styles from "./RegisterLogin.module.css";
+import styles from "../styles/RegisterLogin.module.css";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
