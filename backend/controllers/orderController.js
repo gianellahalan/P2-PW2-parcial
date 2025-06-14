@@ -1,5 +1,5 @@
-const Pedido = require('../models/order');// Modelo Pedido
-const Carrito = require('../models/cart');// Modelo Carrito
+const Pedido = require('../models/order');
+const Carrito = require('../models/cart');
 const Product = require('../models/product'); 
 
 // Crear pedido a partir del carrito del usuario logueado

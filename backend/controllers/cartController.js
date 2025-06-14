@@ -26,9 +26,8 @@ const agregarProducto = async (req, res) => {
     }
 
     const itemExistente = carrito.productos.find(
-    item => item.product && item.product.toString() === productId
+      item => item.product && item.product.toString() === productId
     );
-
 
     if (itemExistente) {
       itemExistente.cantidad += cantidad;
@@ -36,13 +35,18 @@ const agregarProducto = async (req, res) => {
       carrito.productos.push({ product: productId, cantidad });
     }
 
+      console.log("Carrito antes de guardar:", JSON.stringify(carrito, null, 2));
+
     await carrito.save();
-    res.json(carrito);
+    const carritoActualizado = await Cart.findOne({ user: req.user.id }).populate('productos.product');
+    res.json(carritoActualizado);
+
   } catch (err) {
-  console.error('Error al agregar producto al carrito:', err); // 🔍 LOG COMPLETO
-  res.status(500).json({ error: 'Error al agregar producto al carrito' });
-}
+    console.error('Error al agregar producto al carrito:', err);
+    res.status(500).json({ error: 'Error al agregar producto al carrito' });
+  }
 };
+
 
 // Eliminar producto del carrito
 const eliminarProducto = async (req, res) => {

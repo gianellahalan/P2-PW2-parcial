@@ -19,7 +19,7 @@ const createProduct = async (req, res, next) => {
     const error = new Error("Errores de validación");
     error.status = 400;
     error.errores = errors.array();
-    return next(error); // Enviamos al middleware de errores
+    return next(error); 
   }
 
   try {

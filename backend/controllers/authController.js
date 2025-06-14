@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-//Login para ADMIN 
+//Login para distinguir ADMIN 
 const login = async (req, res, next) => {
   const errors = validationResult(req);
 
@@ -27,6 +27,7 @@ const login = async (req, res, next) => {
       return res.status(401).json({ error: 'Credenciales inválidas' });
     }
 
+    // Genera el token del usuario registrado
     const token = jwt.sign(
       { id: user._id, rol: user.rol },
       process.env.JWT_SECRET,
@@ -52,10 +53,8 @@ const validarAdmin = [
 //Registrar usuario
 const register = async (req, res, next) => {
   const errors = validationResult(req);
-  console.log("Errores de validación:", errors.array());
-  console.log("📥 Se recibió POST /api/auth/register");
 
-  if (!errors.isEmpty()){
+  if (!errors.isEmpty()) {
     const error = new Error("Errores de validación");
     error.status = 400;
     error.errores = errors.array();
@@ -73,7 +72,17 @@ const register = async (req, res, next) => {
     const nuevoUsuario = new User({ nombre, email, password, rol });
     await nuevoUsuario.save();
 
-    res.status(201).json({ mensaje: "Usuario registrado correctamente" });
+    //Generar el token con el usuario recién creado
+    const token = jwt.sign(
+      { id: nuevoUsuario._id, rol: nuevoUsuario.rol },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(201).json({
+      mensaje: "Usuario registrado correctamente",
+      token
+    });
   } catch (err) {
     next(err);
   }

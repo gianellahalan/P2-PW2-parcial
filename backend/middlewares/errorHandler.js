@@ -1,23 +1,3 @@
-/* CODIGO DEL PROFE CON CAMBIOS (res.status y .json por res.error)
-const errorHandler = (err, req, res, next) => { 
-  console.error("Error:", err.stack); 
- 
-  if (err.name === "ValidationError") { 
-    return res.status(400).json({ mensaje: "Datos inválidos" });
-
-  } 
- 
-  if (err.code === 11000) { 
-    return res.status(409).json({ mensaje: "El producto ya existe" });
-
-  } 
- 
-  res.status(500).json({ mensaje: "Error interno del servidor" });
-}; 
- 
-module.exports = errorHandler;
-*/
-
 const errorHandler = (err, req, res, next) => {
   console.error("Error:", err.stack);
 
@@ -29,14 +9,14 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  // Error de duplicado (índice único en MongoDB)
+  // Error de duplicado
   if (err.code === 11000) {
     return res.status(409).json({
       mensaje: "El producto ya existe"
     });
   }
 
-  // Otros errores personalizados con errores detallados
+  // Otros errores
   if (err.errores) {
     return res.status(err.status || 400).json({
       mensaje: err.message || "Error en la solicitud",
@@ -44,7 +24,7 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  // Fallback para errores no manejados
+  // Errores no manejados
   res.status(err.status || 500).json({
     mensaje: err.message || "Error interno del servidor"
   });
