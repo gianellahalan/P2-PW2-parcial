@@ -27,7 +27,7 @@ Aplicación web fullstack de e-commerce desarrollada con **React** (frontend) y 
 - Verificación de token en frontend y backend
 - Redirección automática si no está autenticado
 
-## 🧪 Funcionalidades del Sistema
+## Funcionalidades del Sistema
 
 - Registro y login de usuarios
 - Dashboard principal protegido
