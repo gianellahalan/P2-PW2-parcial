@@ -19,7 +19,6 @@
 }
 
 .card {
-  background: rgb(203, 185, 155);
   padding: 15px;
   border-radius: 10px;
   border: 1px solid rgb(31, 43, 63);
@@ -40,16 +39,16 @@
 }
 
 .boton {
-  margin-top: 10px;
-  padding: 8px;
-  background-color: rgb(224, 212, 192);
-  border: 1px solid rgb(31, 43, 63);
+  background-color:rgb(31, 43, 63);
+  color:  rgb(224, 212, 192);
+  width: 180px;
+  height: 40px;
   border-radius: 5px;
-  cursor: pointer;
+  font-size: 20px;
 }
 
-.boton:hover {
-  filter: invert();
+.boton:hover{
+    background-color: rgb(63, 79, 108);
 }
 
 .error {

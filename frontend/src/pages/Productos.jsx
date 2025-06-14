@@ -13,7 +13,7 @@ function Productos() {
       .catch(() => setError("❌ No se pudieron cargar los productos"));
   }, []);
 
-const agregarAlCarrito = async (productoId) => {
+const agregarAlCarrito = async (productId) => {
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -28,7 +28,7 @@ const agregarAlCarrito = async (productoId) => {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
-      body: JSON.stringify({ productoId }), 
+      body: JSON.stringify({ productId }), 
     });
 
     const data = await res.json();
@@ -55,7 +55,7 @@ const agregarAlCarrito = async (productoId) => {
             <img src={producto.imagen} alt={producto.nombre} className={styles.img} />
             <h3>{producto.nombre}</h3>
             <p>${producto.precio}</p>
-            <button className={styles.boton} onClick={() => agregarAlCarrito(producto._id)}>Agregar</button>
+            <button className={styles.boton} onClick={() => agregarAlCarrito(producto._id)}>Agregar al carrito</button>
           </div>
         ))}
       </div>
