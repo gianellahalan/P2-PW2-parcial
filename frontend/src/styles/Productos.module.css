@@ -1,13 +1,11 @@
 .productosContainer {
   width: 80%;
-  padding: 30px;
   background-color: rgb(224, 212, 192);
   margin: auto;
 }
 
 .titulo {
   text-align: center;
-  font-size: 2rem;
   color: rgb(31, 43, 63);
 }
 
@@ -15,7 +13,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .card {
@@ -28,12 +26,12 @@
 
 .card:hover {
   transform: scale(1.05);
-  filter: brightness(0.95);
+  filter: brightness(0.93);
 }
 
 .img {
   width: 100%;
-  height: 400px;
+  height: 300px;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -45,6 +43,7 @@
   height: 40px;
   border-radius: 5px;
   font-size: 20px;
+  border: none;
 }
 
 .boton:hover{
@@ -53,7 +52,6 @@
 
 .error {
   text-align: center;
-  min-height: 55vh;
   font-size: 25px;
   align-content: center;
 }

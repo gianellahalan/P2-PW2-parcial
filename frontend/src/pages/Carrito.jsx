@@ -111,7 +111,7 @@ function Carrito() {
         <div className={styles.divTotal}>
           <h2 className={styles.h2}>Tu Carrito</h2>
           <h4>Total: ${total}</h4>
-          <Button variant="secondary" onClick={vaciarCarrito} className={styles.button2}>
+          <Button variant="secondary" onClick={vaciarCarrito} id={styles.buttonVaciar} className={styles.button2}>
             Vaciar carrito
           </Button>
           <Button variant="success" onClick={confirmarPedido} className={styles.button2}>

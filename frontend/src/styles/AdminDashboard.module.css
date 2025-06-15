@@ -1,29 +1,96 @@
-.contenedorEntero{}
+.contenedorEntero{
+    width: 80%;
+    margin: auto;
+    justify-items: center;
+}
 
-.botonAgregarProd{}
+.botonAgregarProd {
+  background-color:rgb(31, 43, 63);
+  color:  rgb(224, 212, 192);
+  width: 180px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+}
 
-.tablaAcciones{}
+.botonAgregarProd:hover, .botonAcciones:hover{
+    background-color: rgb(57, 92, 152);;
+}
 
-.thAcciones{}
+.tablaAcciones{
+    width: 70%;
+    margin: 20px;
+    text-align: center;
+}
 
-.tbodyDatos{}
+.thAcciones{
+    font-size: 25px;
+}
 
-.tdDatos{}
+.tdBotonesAcciones{
+    text-align: center;
+}
 
-.botonAcciones{}
+.botonAcciones{
+    background-color: rgb(31, 43, 63);
+    color:  rgb(224, 212, 192);
+    width: 130px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+}
 
-.h2{}
+#botonEliminar{
+    color: rgb(255, 112, 112);
+}
 
-.formAccionesCompleto{}
+/*-------------------DIV EMERGENTE-------------------*/
 
-.modalBody{}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
-.formGroup{}
+.customModal {
+  background-color: rgb(224, 212, 192);
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 10000;
+  justify-items: center;
+}
 
-.formGroupLabel{}
+.formGroup{
+    border: 1px solid red;
+    justify-content: space-between;
+    width: 500px;
+}
 
-.formGroupLabelValues{}
+.formGroupLabels{
+    border: 1px solid blue;
+    width: 200px;
+}
 
-.modalFooter{}
+.formGroupData{
+    border:1px solid white;
+    width: 300px;
+}
 
-.botonNewLabel{}
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}

@@ -1,6 +1,7 @@
 import logo from "../assets/img/logo.png";
 import slogan from "../assets/img/the six.png";
 import guitarra from "../assets/img/guitarra.png";
+import usuario from "../assets/img/usuario.png";
 import disco from "../assets/img/disc.png";
 import carrito from "../assets/img/carrito.png";
 import { Link } from "react-router-dom";
@@ -21,15 +22,15 @@ function Header() {
         />
         <ul id="nav">
           <li>
-            <Link to="/productos">
-              <img src={guitarra} className="logos" alt="Instrumentos" />
-              <p>Instrumentos</p>
+            <Link to="/login">
+              <img src={usuario} className="logos" alt="Iniciar Sesión" />
+              <p>Iniciar Sesión</p>
             </Link>
           </li>
           <li>
-            <Link to="/accesorios">
-              <img src={logo} className="logos" alt="Accesorios" />
-              <p>Accesorios</p>
+            <Link to="/productos">
+              <img src={guitarra} className="logos" alt="Instrumentos" />
+              <p>Instrumentos</p>
             </Link>
           </li>
           <li>

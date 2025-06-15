@@ -1,7 +1,6 @@
 .containerG{
     width: 60%;
-    min-height: 60vh;
-    margin: 50px auto;
+    margin: 20px auto;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -9,8 +8,9 @@
 
 .pNoHay{
     font-size: 25px;
-    align-content: center;
-    height: 55vh;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
 }
 
 .containerC{
@@ -32,24 +32,25 @@
 
 .cardBody{
     text-align: center;
-    margin: 15px;
+    margin: 10px;
     align-content: center;
 }
 
 .button{
     color: rgb(255, 112, 112);
     background-color: rgb(31, 43, 63); 
+    border: none;
     width: 100px;
     height: 35px;
 }
 
-.button:hover{
+.button:hover, #buttonVaciar:hover{
     background-color: rgb(255, 112, 112);
     color: rgb(31, 43, 63); 
 }
 
 .divTotal{
-    margin-top: 10px;
+    margin: 10px;
     width: 400px;
     height: 230px;
     border: 1px solid rgb(31, 43, 63);
@@ -64,6 +65,7 @@
 .button2{
     background-color:rgb(31, 43, 63);
     color:  rgb(224, 212, 192);
+    border: none;
     width: 150px;
     height: 45px;
     margin: 15px;
@@ -72,4 +74,8 @@
 
 .button2:hover{
     background-color: rgb(63, 79, 108);
+}
+
+#buttonVaciar{
+    color: rgb(255, 112, 112);
 }

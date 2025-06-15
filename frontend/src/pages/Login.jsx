@@ -37,7 +37,7 @@ function Login() {
       setUserAndToken(data.user, data.token);
       localStorage.setItem("token", data.token);
 
-      // ✅ Validación segura del rol
+      // Validación segura del rol
       if (data.user?.rol === "admin") {
         navigate("/admin");
       } else {
@@ -61,7 +61,6 @@ function Login() {
               <Form.Label className={styles.label}>Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Ingresa tu email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -73,7 +72,6 @@ function Login() {
               <Form.Label className={styles.label}>Contraseña</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Ingresa tu contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -85,6 +83,9 @@ function Login() {
               Ingresar
             </Button>
           </Form>
+
+          <p>¿No tienes cuenta?</p>
+          <p><a href="/register" className={styles.a}>Registrate</a></p>
         </Col>
       </Row>
     </Container>

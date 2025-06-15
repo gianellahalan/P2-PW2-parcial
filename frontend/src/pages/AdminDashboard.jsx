@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Table, Button, Modal, Form, Alert } from "react-bootstrap";
+import { Container, Table, Button, Form, Alert } from "react-bootstrap";
 import styles from "../styles/AdminDashboard.module.css";
 
 function AdminDashboard() {
@@ -65,100 +65,113 @@ function AdminDashboard() {
     setShowModal(true);
   };
 
+  const openNew = () => {
+    setForm({ nombre: "", descripcion: "", precio: "", stock: "", imagen: "" });
+    setEditingId(null);
+    setShowModal(true);
+  };
+
   return (
-    <Container className={styles.contenedorEntero}>
-      <h2>Panel de Administración</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
+    <>
+      <Container className={styles.contenedorEntero}>
+        <h2>Panel de Administración</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
 
-      <Button className={styles.botonAgregarProd} onClick={() => setShowModal(true)}>Agregar Producto</Button>
+        <Button className={styles.botonAgregarProd} onClick={openNew}>
+          Agregar Producto
+        </Button>
 
-      <Table striped bordered hover className={styles.tablaAcciones}>
-        <thead>
-          <tr>
-            <th className={styles.thAcciones}>Nombre</th>
-            <th className={styles.thAcciones}>Precio</th>
-            <th className={styles.thAcciones}>Stock</th>
-            <th className={styles.thAcciones}>Acciones</th>
-          </tr>
-        </thead>
-        <tbody className={styles.tbodyDatos}>
-          {productos.map(prod => (
-            <tr key={prod._id}>
-              <td className={styles.tdDatos}>{prod.nombre}</td>
-              <td className={styles.tdDatos}>${prod.precio}</td>
-              <td className={styles.tdDatos}>{prod.stock}</td>
-              <td>
-                <Button className={styles.botonAcciones} onClick={() => openEdit(prod)}>Editar</Button>{" "}
-                <Button className={styles.botonAcciones} variant="danger" onClick={() => handleDelete(prod._id)}>Eliminar</Button>
-              </td>
+        <Table striped bordered hover className={styles.tablaAcciones}>
+          <thead>
+            <tr>
+              <th className={styles.thAcciones}>Nombre</th>
+              <th className={styles.thAcciones}>Precio</th>
+              <th className={styles.thAcciones}>Stock</th>
+              <th className={styles.thAcciones}>Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody className={styles.tbodyDatos}>
+            {productos.map(prod => (
+              <tr key={prod._id}>
+                <td className={styles.tdDatos}>{prod.nombre}</td>
+                <td className={styles.tdDatos}>${prod.precio}</td>
+                <td className={styles.tdDatos}>{prod.stock}</td>
+                <td className={styles.tdBotonesAcciones}>
+                  <Button className={styles.botonAcciones} onClick={() => openEdit(prod)}>Editar</Button>{" "}
+                  <Button id={styles.botonEliminar} className={styles.botonAcciones} variant="danger" onClick={() => handleDelete(prod._id)}>Eliminar</Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title className={styles.h2}>{editingId ? "Editar Producto" : "Nuevo Producto"}</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSubmit} className={styles.formAccionesCompleto}>
-          <Modal.Body className={styles.modalBody}>
-            <Form.Group className={styles.formGroup}>
-              <Form.Label className={styles.formGroupLabel}>Nombre</Form.Label>
-              <Form.Control
-                type="text"
-                value={form.nombre}
-                onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-                required
-                className={styles.formGroupLabelValues}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className={styles.formGroupLabel}>Descripción</Form.Label>
-              <Form.Control
-                as="textarea"
-                value={form.descripcion}
-                onChange={(e) => setForm({ ...form, descripcion: e.target.value })}
-                className={styles.formGroupLabelValues}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className={styles.formGroupLabel}>Precio</Form.Label>
-              <Form.Control
-                type="number"
-                value={form.precio}
-                onChange={(e) => setForm({ ...form, precio: Number(e.target.value) })}
-                required
-                className={styles.formGroupLabelValues}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className={styles.formGroupLabel}>Stock</Form.Label>
-              <Form.Control
-                type="number"
-                value={form.stock}
-                onChange={(e) => setForm({ ...form, stock: Number(e.target.value) })}
-                className={styles.formGroupLabelValues}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className={styles.formGroupLabel}>URL Imagen</Form.Label>
-              <Form.Control
-                type="text"
-                value={form.imagen}
-                onChange={(e) => setForm({ ...form, imagen: e.target.value })}
-                className={styles.formGroupLabelValues}
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer className={styles.modalFooter}>
-            <Button variant="secondary" onClick={() => setShowModal(false)} className={styles.botonNewLabel}>Cancelar</Button>
-            <Button type="submit" variant="primary" className={styles.botonNewLabel}>
-              {editingId ? "Actualizar" : "Crear"}
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-    </Container>
+      {showModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
+          <div className={styles.customModal} onClick={e => e.stopPropagation()}>
+            <h3>{editingId ? "Editar Producto" : "Nuevo Producto"}</h3>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className={styles.formGroup}>
+                <Form.Label className={styles.formGroupLabels}>Nombre</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={form.nombre}
+                  onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+                  className={styles.formGroupData}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className={styles.formGroup}>
+                <Form.Label className={styles.formGroupLabels}>Descripción</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  value={form.descripcion}
+                  onChange={(e) => setForm({ ...form, descripcion: e.target.value })}
+                  className={styles.formGroupData}
+                />
+              </Form.Group>
+              <Form.Group className={styles.formGroup}>
+                <Form.Label className={styles.formGroupLabels}>Precio</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={form.precio}
+                  onChange={(e) => setForm({ ...form, precio: Number(e.target.value) })}
+                  required
+                  className={styles.formGroupData}
+                />
+              </Form.Group>
+              <Form.Group className={styles.formGroup}>
+                <Form.Label className={styles.formGroupLabels}>Stock</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={form.stock}
+                  onChange={(e) => setForm({ ...form, stock: Number(e.target.value) })}
+                  className={styles.formGroupData}
+                />
+              </Form.Group>
+              <Form.Group className={styles.formGroup}>
+                <Form.Label className={styles.formGroupLabels}>URL Imagen</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={form.imagen}
+                  onChange={(e) => setForm({ ...form, imagen: e.target.value })}
+                  className={styles.formGroupData}
+                />
+              </Form.Group>
+
+              <div className={styles.modalFooter}>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                  Cancelar
+                </Button>
+                <Button type="submit" variant="primary">
+                  {editingId ? "Actualizar" : "Crear"}
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

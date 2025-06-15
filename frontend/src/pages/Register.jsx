@@ -97,9 +97,6 @@ function Register() {
               Registrarse
             </Button>
           </Form>
-
-          <p>¿Ya tienes cuenta?</p>
-          <p><a href="/login" className={styles.a}>Inicia sesión</a></p>
         </Col>
       </Row>
     </Container>
