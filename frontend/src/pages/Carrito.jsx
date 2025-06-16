@@ -66,10 +66,44 @@ function Carrito() {
   };
 
   const confirmarPedido = async () => {
-    alert("Pedido confirmado. Gracias por tu compra!");
-    // Aquí podrías enviar la orden al backend en el futuro
-    await vaciarCarrito();
-  };
+  try {
+    const token = localStorage.getItem("token");
+    const resCarrito = await fetch("http://localhost:3000/api/carrito", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const carrito = await resCarrito.json();
+
+    if (!carrito.productos || carrito.productos.length === 0) {
+      alert("Tu carrito está vacío.");
+      return;
+    }
+
+    const resPedido = await fetch("http://localhost:3000/api/pedidos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productos: carrito.productos,
+        total: carrito.total,
+      }),
+    });
+
+    if (resPedido.ok) {
+      alert("Pedido confirmado. ¡Gracias por tu compra!");
+      await vaciarCarrito();
+    } else {
+      alert("Hubo un problema al confirmar el pedido.");
+    }
+  } catch (error) {
+    console.error("Error al confirmar pedido:", error);
+    alert("Error al confirmar el pedido.");
+  }
+};
 
   const total = productos.reduce((acc, prod) => {
     return acc + (prod.product?.precio || 0) * prod.cantidad;

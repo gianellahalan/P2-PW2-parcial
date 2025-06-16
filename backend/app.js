@@ -1,8 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const productRoutes = require('./routes/productRoutes');
-const authRoutes = require('./routes/authRoutes');
 const dotenv = require('dotenv');
 dotenv.config(); // Para usar variables de entorno desde .env
 const cors = require("cors");
@@ -13,7 +11,6 @@ app.use(express.static('public'));
 //Handlers
 const responseHandler = require("./middlewares/responseHandler"); 
 const errorHandler = require("./middlewares/errorHandler"); 
- 
 app.use(responseHandler);
 app.use(errorHandler);
 
@@ -29,9 +26,11 @@ mongoose.connect('mongodb://localhost:27017/ecommerce', {
 app.use(express.json());
 
 // Ruta para ver productos
+const productRoutes = require('./routes/productRoutes');
 app.use('/api/productos', productRoutes);
 
 //Ruta de autenticación
+const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
 // Carrito
@@ -41,6 +40,10 @@ app.use('/api/carrito', cartRoutes);
 //Pedidos
 const orderRoutes = require('./routes/orderRoutes');
 app.use('/api/pedidos', orderRoutes);
+
+//Usuarios
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/usuarios', userRoutes);
 
 // Puerto
 const PORT = process.env.PORT || 3000;

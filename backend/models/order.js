@@ -3,16 +3,19 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   productos: [
     {
       product: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Product',
+        required: true
       },
       cantidad: {
-        type: Number
+        type: Number,
+        required: true
       }
     }
   ],
@@ -21,7 +24,11 @@ const orderSchema = new mongoose.Schema({
     enum: ['pendiente', 'entregado', 'cancelado'],
     default: 'pendiente'
   },
-  total: Number,
-}, { timestamps: true });
+  total: {
+    type: Number,
+    required: true
+  }
+}, { timestamps: true }); // Esto agrega createdAt y updatedAt automáticamente
 
 module.exports = mongoose.model('Order', orderSchema);
+

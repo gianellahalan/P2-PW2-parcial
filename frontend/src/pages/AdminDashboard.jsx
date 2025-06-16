@@ -160,10 +160,10 @@ function AdminDashboard() {
               </Form.Group>
 
               <div className={styles.modalFooter}>
-                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                <Button variant="secondary" onClick={() => setShowModal(false)} className={styles.botonCancelar}>
                   Cancelar
                 </Button>
-                <Button type="submit" variant="primary">
+                <Button type="submit" variant="primary" className={styles.boton}>
                   {editingId ? "Actualizar" : "Crear"}
                 </Button>
               </div>

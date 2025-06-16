@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Productos from "./pages/Productos";
 import Carrito from "./pages/Carrito";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminPedidos from "./pages/AdminPedidos";
+import AdminUsuarios from "./pages/AdminUsuarios";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import './App.css'
 
@@ -18,8 +20,16 @@ function App() {
           <Route path="/productos" element={<Productos />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/admin" element={
+              <ProtectedAdminRoute>
+                <AdminDashboard />
+              </ProtectedAdminRoute>}/>
+          <Route path="/pedidos" element={
+              <ProtectedAdminRoute>
+                <AdminPedidos />
+              </ProtectedAdminRoute>}/>
+          <Route path="/usuarios" element={
             <ProtectedAdminRoute>
-            <AdminDashboard />
+              <AdminUsuarios />
             </ProtectedAdminRoute>}/>
         </Route>
       </Routes>
@@ -27,4 +37,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

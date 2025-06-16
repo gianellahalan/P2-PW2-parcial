@@ -1,6 +1,6 @@
 const Pedido = require('../models/order');
 const Carrito = require('../models/cart');
-const Product = require('../models/product'); 
+const Product = require('../models/product');
 
 // Crear pedido a partir del carrito del usuario logueado
 const crearPedido = async (req, res) => {
@@ -45,7 +45,7 @@ const crearPedido = async (req, res) => {
 const obtenerMisPedidos = async (req, res) => {
   try {
     const userId = req.user._id;
-    const pedidos = await Pedido.find({ user: userId }).sort({ fecha: -1 });
+    const pedidos = await Pedido.find({ user: userId }).sort({ createdAt: -1 });
     res.json(pedidos);
   } catch (error) {
     console.error(error);
@@ -56,7 +56,10 @@ const obtenerMisPedidos = async (req, res) => {
 // Obtener todos los pedidos (solo admin)
 const obtenerTodosLosPedidos = async (req, res) => {
   try {
-    const pedidos = await Pedido.find().populate('user', 'email nombre').sort({ fecha: -1 });
+    const pedidos = await Pedido.find()
+      .populate('user', 'email nombre')                   
+      .populate('productos.product', 'nombre precio imagen')
+      .sort({ createdAt: -1 });
     res.json(pedidos);
   } catch (error) {
     console.error(error);
@@ -70,7 +73,6 @@ const cambiarEstadoPedido = async (req, res) => {
     const { id } = req.params;
     const { estado } = req.body;
 
-    // Validar estados permitidos
     const estadosPermitidos = ['pendiente', 'entregado', 'cancelado'];
     if (!estadosPermitidos.includes(estado)) {
       return res.status(400).json({ error: 'Estado no válido' });
