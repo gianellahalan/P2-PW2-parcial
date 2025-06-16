@@ -1,0 +1,69 @@
+.info{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.article{
+	width: 20%;
+	margin: 50px;
+	position: relative;
+}
+
+.article2{
+	width: 30%;
+	margin: 50px;
+}
+
+.product{
+	width: 100%;
+}
+
+.divTransparente{
+	width:100%;
+	height:100%;
+	position: absolute;
+	top:0;
+	opacity:0;
+	background-color:#000;
+	transition:0.9s ease;
+	align-content: center;
+	text-align: justify;
+}
+
+.divTransparente:hover{
+	opacity:1;
+	background-color:rgba(0, 0, 0, .5);
+}
+
+.p{
+	width: 100px;
+	padding: 20px;
+	border: 1px solid rgb(31, 43, 63);
+	filter: invert();
+	margin: auto;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.boton{
+	display: flex;
+	flex-direction: row;
+	border: 1px solid rgb(31, 43, 63);
+	border-radius: 20px;
+	width: 60%;
+	margin: 30px auto;
+	justify-content: center;
+}
+
+.boton:hover{
+	background-color:rgb(224, 212, 192);
+	border-color: rgb(224, 212, 192);
+	filter: invert();
+}
+
+.boton img{
+	width: 30px;
+	height: 30px;
+	padding: 10px;
+}

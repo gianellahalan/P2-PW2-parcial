@@ -41,23 +41,11 @@ const crearPedido = async (req, res) => {
   }
 };
 
-// Obtener todos los pedidos del usuario logueado
+// Obtener pedidos del usuario autenticado
 const obtenerMisPedidos = async (req, res) => {
   try {
     const userId = req.user._id;
-    const pedidos = await Pedido.find({ user: userId }).sort({ createdAt: -1 });
-    res.json(pedidos);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error al obtener pedidos' });
-  }
-};
-
-// Obtener todos los pedidos (solo admin)
-const obtenerTodosLosPedidos = async (req, res) => {
-  try {
-    const pedidos = await Pedido.find()
-      .populate('user', 'email nombre')                   
+    const pedidos = await Pedido.find({ user: userId })
       .populate('productos.product', 'nombre precio imagen')
       .sort({ createdAt: -1 });
     res.json(pedidos);
@@ -67,7 +55,51 @@ const obtenerTodosLosPedidos = async (req, res) => {
   }
 };
 
-// Cambiar estado de pedido (solo admin)
+// Cancelar pedido del usuario (si está pendiente)
+const cancelarPedido = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { id } = req.params;
+
+    const pedido = await Pedido.findById(id);
+
+    if (!pedido) {
+      return res.status(404).json({ error: 'Pedido no encontrado' });
+    }
+
+    if (pedido.user.toString() !== userId.toString()) {
+      return res.status(403).json({ error: 'No tienes permiso para cancelar este pedido' });
+    }
+
+    if (pedido.estado !== 'pendiente') {
+      return res.status(400).json({ error: 'Solo se pueden cancelar pedidos pendientes' });
+    }
+
+    pedido.estado = 'cancelado';
+    await pedido.save();
+
+    res.json({ mensaje: 'Pedido cancelado correctamente', pedido });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al cancelar pedido' });
+  }
+};
+
+// Obtener todos los pedidos (admin)
+const obtenerTodosLosPedidos = async (req, res) => {
+  try {
+    const pedidos = await Pedido.find()
+      .populate('user', 'email nombre')
+      .populate('productos.product', 'nombre precio imagen')
+      .sort({ createdAt: -1 });
+    res.json(pedidos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener pedidos' });
+  }
+};
+
+// Cambiar estado de un pedido (admin)
 const cambiarEstadoPedido = async (req, res) => {
   try {
     const { id } = req.params;
@@ -96,6 +128,7 @@ const cambiarEstadoPedido = async (req, res) => {
 module.exports = {
   crearPedido,
   obtenerMisPedidos,
+  cancelarPedido,
   obtenerTodosLosPedidos,
   cambiarEstadoPedido,
 };

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
   getAllProducts,
+  getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -12,7 +13,9 @@ const {
 const { verificarToken, soloAdmin } = require('../middlewares/authMiddleware');
 
 router.get('/', getAllProducts); // pública
+router.get('/:id', getProductById); //pública
 
+//solo admin
 router.post('/', verificarToken, soloAdmin, validarProduct, createProduct);
 router.put('/:id', verificarToken, soloAdmin, updateProduct);
 router.delete('/:id', verificarToken, soloAdmin, deleteProduct);

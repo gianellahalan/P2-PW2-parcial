@@ -4,11 +4,13 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Productos from "./pages/Productos";
 import Carrito from "./pages/Carrito";
+import MisPedidos from "./pages/MisPedidos";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminPedidos from "./pages/AdminPedidos";
 import AdminUsuarios from "./pages/AdminUsuarios";
+import DetallesProducto from "./pages/DetallesProducto";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
-import './App.css'
+import './App.css';
 
 function App() {
   return (
@@ -18,19 +20,33 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/productos" element={<Productos />} />
+          <Route path="/detallesproducto/:id" element={<DetallesProducto />} />
           <Route path="/carrito" element={<Carrito />} />
-          <Route path="/admin" element={
+          <Route path="/mispedidos" element={<MisPedidos />} />
+          <Route
+            path="/admin"
+            element={
               <ProtectedAdminRoute>
                 <AdminDashboard />
-              </ProtectedAdminRoute>}/>
-          <Route path="/pedidos" element={
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/pedidos"
+            element={
               <ProtectedAdminRoute>
                 <AdminPedidos />
-              </ProtectedAdminRoute>}/>
-          <Route path="/usuarios" element={
-            <ProtectedAdminRoute>
-              <AdminUsuarios />
-            </ProtectedAdminRoute>}/>
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/usuarios"
+            element={
+              <ProtectedAdminRoute>
+                <AdminUsuarios />
+              </ProtectedAdminRoute>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

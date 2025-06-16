@@ -34,9 +34,9 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/cds">
+            <Link to="/mispedidos">
               <img src={disco} className="logos" alt="CDs" />
-              <p>CDs, discos y vinilos</p>
+              <p>Mis pedidos</p>
             </Link>
           </li>
           <li>

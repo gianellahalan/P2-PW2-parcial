@@ -52,6 +52,9 @@
 
 .error {
   text-align: center;
-  font-size: 25px;
-  align-content: center;
+}
+
+.link{
+  display: flex;
+  flex-direction: column;
 }

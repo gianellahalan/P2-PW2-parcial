@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../styles/Productos.module.css";
 
 function Productos() {
@@ -13,56 +14,57 @@ function Productos() {
       .catch(() => setError("No se pudieron cargar los productos"));
   }, []);
 
-const agregarAlCarrito = async (productId) => {
-  const token = localStorage.getItem("token");
+  const agregarAlCarrito = async (productId) => {
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    alert("Debes iniciar sesión para agregar al carrito.");
-    return;
-  }
-
-  try {
-    const res = await fetch("http://localhost:3000/api/carrito/agregar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-      body: JSON.stringify({ productId }), 
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data?.mensaje || "Error al agregar al carrito");
+    if (!token) {
+      alert("Debes iniciar sesión para agregar al carrito.");
+      return;
     }
 
-    alert("Producto agregado al carrito");
-  } catch (error) {
-    console.error("Error al agregar al carrito:", error);
-    alert("No se pudo agregar al carrito");
-  }
-};
+    try {
+      const res = await fetch("http://localhost:3000/api/carrito/agregar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId, cantidad: 1 }), // Aquí envío cantidad:1 para que el backend sume si existe
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data?.mensaje || "Error al agregar al carrito");
+      }
+
+      alert("Producto agregado al carrito");
+    } catch (error) {
+      console.error("Error al agregar al carrito:", error);
+      alert("No se pudo agregar al carrito");
+    }
+  };
 
   return (
     <div className={styles.productosContainer}>
-
       {error && <p className={styles.error}>{error}</p>}
 
       <div className={styles.grid}>
         {productos.map((producto) => (
           <div key={producto._id} className={styles.card}>
-            <img src={producto.imagen} alt={producto.nombre} className={styles.img} />
-            <h3>{producto.nombre}</h3>
-            <p>${producto.precio}</p>
-            <button className={styles.boton} onClick={() => agregarAlCarrito(producto._id)}>Agregar al carrito</button>
+            <Link to={`/detallesproducto/${producto._id}`} className={styles.link}>
+              <img src={producto.imagen} alt={producto.nombre} className={styles.img} />
+              <h3>{producto.nombre}</h3>
+              <p>${producto.precio}</p>
+            </Link>
+            <button className={styles.boton} onClick={() => agregarAlCarrito(producto._id)}>
+              Agregar al carrito
+            </button>
           </div>
         ))}
       </div>
     </div>
   );
 }
-
-
 
 export default Productos;
