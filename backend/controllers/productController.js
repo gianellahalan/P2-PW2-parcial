@@ -27,7 +27,6 @@ const getProductById = async (req, res) => {
   }
 };
 
-
 //Crear un nuevo producto
 const createProduct = async (req, res, next) => {
   const errors = validationResult(req);
