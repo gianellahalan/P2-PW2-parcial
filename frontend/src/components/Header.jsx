@@ -8,19 +8,10 @@ import useSearchStore from "../store/searchStore";
 import { Link } from "react-router-dom";
 
 function Header() {
-<<<<<<< HEAD
-
-  //Buscar producto por nombre
   const { termino, setTermino } = useSearchStore();
 
   const handleChange = (e) => {
     setTermino(e.target.value); 
-=======
-  const { termino, setTermino } = useSearchStore();
-
-  const handleChange = (e) => {
-    setTermino(e.target.value);
->>>>>>> 279b5809e4fa2ac973f976bd79f50a3e23be6f55
   };
 
   return (
@@ -31,7 +22,6 @@ function Header() {
       </div>
 
       <div id="buscadorymenu">
-<<<<<<< HEAD
         <input
           type="text"
           placeholder="Buscar productos"
@@ -39,15 +29,6 @@ function Header() {
           value={termino}
           onChange={handleChange}
         />
-=======
-          <input
-            type="text"
-            placeholder="Buscar productos o marcas"
-            id="buscador"
-            value={termino}
-            onChange={handleChange}
-          />
->>>>>>> 279b5809e4fa2ac973f976bd79f50a3e23be6f55
         <ul id="nav">
           <li>
             <Link to="/login">
