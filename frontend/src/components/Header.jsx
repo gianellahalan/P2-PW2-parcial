@@ -4,9 +4,18 @@ import guitarra from "../assets/img/guitarra.png";
 import usuario from "../assets/img/usuario.png";
 import disco from "../assets/img/disc.png";
 import carrito from "../assets/img/carrito.png";
+import useSearchStore from "../store/searchStore";
 import { Link } from "react-router-dom";
 
 function Header() {
+
+  //Buscar producto por nombre
+  const { termino, setTermino } = useSearchStore();
+
+  const handleChange = (e) => {
+    setTermino(e.target.value); 
+  };
+
   return (
     <header>
       <div id="logoyslogan">
@@ -17,8 +26,10 @@ function Header() {
       <div id="buscadorymenu">
         <input
           type="text"
-          placeholder="Buscar productos o marcas"
+          placeholder="Buscar productos"
           id="buscador"
+          value={termino}
+          onChange={handleChange}
         />
         <ul id="nav">
           <li>
