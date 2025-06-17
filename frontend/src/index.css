@@ -30,6 +30,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	margin: auto;
+	width: 90%;
 }
 
 #logoyslogan {
@@ -120,4 +121,21 @@ a {
 #redes li a img{
 	width: 30px;
 	height: 30px;
+}
+
+/**---------------------MEDIA 900px---------------------**/
+
+@media (max-width:900px){
+	
+	header, #nav{
+		flex-direction: column;
+	}
+	
+	#buscadorymenu{
+		width: 80%;
+	}
+
+	#nav li, #buscador{
+		width: 100%;
+	}
 }

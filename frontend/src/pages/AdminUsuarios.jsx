@@ -8,6 +8,10 @@ function AdminUsuarios() {
 
   const token = localStorage.getItem("token");
 
+    useEffect(() => {
+    document.title = "Usuarios Registrados";
+  }, []);
+
   const fetchUsuarios = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/usuarios", {

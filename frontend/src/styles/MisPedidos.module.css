@@ -1,12 +1,12 @@
 .contenedor{
     margin: auto;
-    width: 60%;
+    width: 80%;
     justify-items: center;
 }
 
 .pedido{
     border: 1px solid rgb(31, 43, 63);
-    width: 50%;
+    width: 450px;
     margin: 15px;
     padding: 20px;
 }
@@ -25,4 +25,12 @@
 .cancelar:hover{
     background-color: rgb(255, 112, 112);
     color: rgb(31, 43, 63); 
+}
+
+/**---------------------MEDIA 700px---------------------**/
+
+@media (max-width:700px){
+    .pedido{
+        width: 400px;
+    }
 }

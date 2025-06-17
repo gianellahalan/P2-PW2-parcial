@@ -8,6 +8,18 @@ const DetallesProducto = () => {
   const [mensaje, setMensaje] = useState('');
 
   useEffect(() => {
+    fetch(`http://localhost:3000/api/productos/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setProducto(data);
+        document.title = data.nombre;
+      })
+      .catch(() => {
+        document.title = "Producto no encontrado";
+      });
+  }, [id]);
+
+  useEffect(() => {
     const obtenerProducto = async () => {
       try {
         const respuesta = await fetch(`http://localhost:3000/api/productos/${id}`);

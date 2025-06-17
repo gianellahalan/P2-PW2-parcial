@@ -1,5 +1,23 @@
 .contenedor{
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  justify-content: center;
+}
+
+.th,.td {
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .th{
@@ -11,13 +29,14 @@
 }
 
 .td{
-    min-width: 120px;
+    min-width: 100px;
     align-content: flex-start;
     padding: 15px;
+    text-align: justify;
 }
 
 .td2{
-     align-content: flex-start;
+    align-content: flex-start;
 }
 
 .select{
@@ -39,3 +58,48 @@
 .boton:hover{
     background-color: rgb(57, 92, 152);
 }
+
+/**---------------------MEDIA 900px---------------------**/
+
+@media (max-width:900px){
+    .tabla, .th, .td, .tr{
+        font-size: 12px;
+    }
+
+    .th{
+        padding: 3px;
+    }
+
+    .td{
+    min-width: 70px;
+    padding: 3px;
+    }
+
+    .boton, .select{
+        width: 80px;
+        height: 20px;
+        font-size: 15px;
+        margin: 3px;
+    }
+
+}
+
+@media (max-width:600px){
+    .tabla, .th, .td, .tr{
+        font-size: 10px;
+    }
+
+    .td{
+        min-width: 58px;
+        margin: 2px;
+    }
+
+    .boton, .select{
+        width: 70px;
+        height: 18px;
+        font-size: 12px;
+        margin: 2px;
+    }
+
+}
+

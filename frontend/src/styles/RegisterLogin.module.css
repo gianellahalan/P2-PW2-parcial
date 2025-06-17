@@ -12,7 +12,9 @@
 }
 
 .registerForm {
-    width: 600px;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
     font-size: 15px;
     margin: auto;
     border-radius: 10px;

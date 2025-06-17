@@ -1,9 +1,8 @@
 .containerG{
-    width: 60%;
     margin: 20px auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .containerC{
@@ -71,4 +70,37 @@
 
 #buttonVaciar{
     color: rgb(255, 112, 112);
+}
+
+.error{
+    text-align: center;
+}
+
+/**---------------------MEDIA 700px---------------------**/
+
+@media (max-width:700px){
+    .containerG{
+        flex-direction: column;
+        justify-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .card, .divTotal{
+        width: 80%;
+        margin: 5px auto;
+    }
+
+    .card{
+        justify-content: space-between;
+    }
+
+    .cardBody{
+        padding: 5%;
+    }
+
+    .imgCard{
+    width: 40%;
+    height: 100%;
+    }
 }

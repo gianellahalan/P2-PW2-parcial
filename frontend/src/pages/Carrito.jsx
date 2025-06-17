@@ -21,7 +21,7 @@ function Carrito() {
       .then((res) => res.json())
       .then((data) => {
         if (!data || !Array.isArray(data.productos)) {
-          setError("No se pudo obtener el carrito.");
+          setError(<p className={"styles.error"}>"No se pudo obtener el carrito."</p>);
         } else {
           setProductos(data.productos);
         }

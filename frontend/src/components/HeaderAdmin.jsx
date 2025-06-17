@@ -4,13 +4,16 @@ import guitarra from "../assets/img/guitarra.png";
 import usuario from "../assets/img/usuario.png";
 import disco from "../assets/img/disc.png";
 import carrito from "../assets/img/carrito.png";
+import useAuthStore from "../store/authStore";
 import { Link, useNavigate } from "react-router-dom";
 
 function HeaderAdmin() {
   const navigate = useNavigate();
+  const logout = useAuthStore((state) => state.logout)
 
   //Cerrar sesión
   const handleLogout = () => {
+    logout();
     localStorage.removeItem("token");
     navigate("/login");
   };
@@ -30,7 +33,7 @@ function HeaderAdmin() {
         />
 
         <ul id="nav">
-          <li onClick={handleLogout} style={{ cursor: "pointer" }}>
+          <li onClick={handleLogout}>
             <img src={usuario} className="logos" alt="Cerrar Sesión" />
             <p>Cerrar Sesión</p>
           </li>

@@ -1,7 +1,9 @@
 .productosContainer {
-  width: 80%;
-  background-color: rgb(224, 212, 192);
+  width: 90%;
   margin: auto;
+  background-color: rgb(224, 212, 192);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .titulo {
@@ -11,7 +13,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }

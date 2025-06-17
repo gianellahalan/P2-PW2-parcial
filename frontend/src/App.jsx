@@ -10,6 +10,7 @@ import AdminPedidos from "./pages/AdminPedidos";
 import AdminUsuarios from "./pages/AdminUsuarios";
 import DetallesProducto from "./pages/DetallesProducto";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css';
 
 function App() {
@@ -23,30 +24,26 @@ function App() {
           <Route path="/detallesproducto/:id" element={<DetallesProducto />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/mispedidos" element={<MisPedidos />} />
-          <Route
-            path="/admin"
-            element={
-              <ProtectedAdminRoute>
-                <AdminDashboard />
-              </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/pedidos"
-            element={
-              <ProtectedAdminRoute>
-                <AdminPedidos />
-              </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/usuarios"
-            element={
-              <ProtectedAdminRoute>
-                <AdminUsuarios />
-              </ProtectedAdminRoute>
-            }
-          />
+          <Route path="/admin" element={
+            <ProtectedAdminRoute>
+              <AdminDashboard />
+            </ProtectedAdminRoute>}/>
+          <Route path="/pedidos" element={
+            <ProtectedAdminRoute>
+              <AdminPedidos />
+            </ProtectedAdminRoute>}/>
+          <Route path="/usuarios" element={
+            <ProtectedAdminRoute>
+              <AdminUsuarios />
+            </ProtectedAdminRoute>}/>
+          <Route path="/carrito" element={
+            <ProtectedRoute>
+              <Carrito />
+            </ProtectedRoute>}/>
+        <Route path="/mispedidos" element={
+          <ProtectedRoute>
+            <MisPedidos />
+          </ProtectedRoute>}/>
         </Route>
       </Routes>
     </BrowserRouter>

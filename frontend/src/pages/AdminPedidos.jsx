@@ -9,6 +9,10 @@ function AdminPedidos() {
 
   const token = localStorage.getItem("token");
 
+    useEffect(() => {
+    document.title = "Pedidos";
+  }, []);
+
   const fetchPedidos = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/pedidos/admin", {

@@ -11,6 +11,10 @@ function AdminDashboard() {
 
   const token = localStorage.getItem("token");
 
+    useEffect(() => {
+    document.title = "Panel de administración";
+  }, []);
+
   const fetchProductos = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/productos", {
