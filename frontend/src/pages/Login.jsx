@@ -27,12 +27,19 @@ function Login() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-      console.log("Respuesta del login:", data);
-      console.log("Usuario:", data.user);
-      console.log("Rol:", data.user?.rol);
+      const text = await response.text();
+      let data;
 
-      if (!response.ok) throw new Error(data.message || "Error al iniciar sesión");
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+      throw new Error("Respuesta inválida del servidor");
+      }
+
+      if (!response.ok) {
+        throw new Error(data?.message || "Error al iniciar sesión");
+      }
+
 
       setUserAndToken(data.user, data.token);
       localStorage.setItem("token", data.token);

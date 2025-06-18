@@ -11,7 +11,7 @@ function AdminDashboard() {
 
   const token = localStorage.getItem("token");
 
-    useEffect(() => {
+  useEffect(() => {
     document.title = "Panel de administración";
   }, []);
 
@@ -41,8 +41,21 @@ function AdminDashboard() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
+  // Validación manual
+  if (
+    !form.nombre.trim() ||
+    !form.descripcion.trim() ||
+    !form.precio ||
+    !form.stock ||
+    !form.imagen.trim()
+  ) {
+    alert("Todos los campos deben estar completos");
+    return;
+  }
+
+  try {
     const method = editingId ? "PUT" : "POST";
     const url = editingId
       ? `http://localhost:3000/api/productos/${editingId}`
@@ -60,18 +73,25 @@ function AdminDashboard() {
     setShowModal(false);
     setForm({ nombre: "", descripcion: "", precio: "", stock: "", imagen: "" });
     setEditingId(null);
+    setError(""); // limpiar error
     fetchProductos();
-  };
+  } catch (err) {
+    setError("Error al guardar el producto");
+  }
+};
+
 
   const openEdit = (prod) => {
     setForm(prod);
     setEditingId(prod._id);
+    setError("");
     setShowModal(true);
   };
 
   const openNew = () => {
     setForm({ nombre: "", descripcion: "", precio: "", stock: "", imagen: "" });
     setEditingId(null);
+    setError("");
     setShowModal(true);
   };
 
@@ -115,6 +135,8 @@ function AdminDashboard() {
           <div className={styles.customModal} onClick={e => e.stopPropagation()}>
             <h3>{editingId ? "Editar Producto" : "Nuevo Producto"}</h3>
             <Form onSubmit={handleSubmit}>
+              {error && <Alert variant="danger">{error}</Alert>}
+
               <Form.Group className={styles.formGroup}>
                 <Form.Label className={styles.formGroupLabels}>Nombre</Form.Label>
                 <Form.Control

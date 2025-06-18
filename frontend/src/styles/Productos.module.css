@@ -1,9 +1,8 @@
 .productosContainer {
-  width: 90%;
+  width: 80%;
   margin: auto;
   background-color: rgb(224, 212, 192);
   padding: 20px;
-  box-sizing: border-box;
 }
 
 .titulo {
@@ -15,7 +14,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 20px;
-  margin: 20px;
+  margin: 20px auto;
 }
 
 .card {
@@ -29,7 +28,7 @@
 
 .card:hover {
   transform: scale(1.05);
-  filter: brightness(0.93);
+  filter: brightness(0.80);
 }
 
 .img {

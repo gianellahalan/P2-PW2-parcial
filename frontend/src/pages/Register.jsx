@@ -12,7 +12,7 @@ function Register() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [errores, setErrores] = useState([]);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -36,15 +36,15 @@ function Register() {
           localStorage.setItem("token", data.token);
           navigate("/productos");
         } else {
-          setError(data?.mensaje || "❌ No se pudo registrar");
+          setErrores(data?.errores || [{ msg: data?.mensaje || "No se pudo registrar" }]);
         }
       } catch (err) {
         console.error("Error al parsear JSON:", err);
-        setError("❌ Error interno del servidor");
+        setErrores([{ msg: "Error interno del servidor" }]);
       }
     } catch (err) {
       console.error("Error en el fetch:", err);
-      setError("❌ No se pudo conectar con el servidor");
+      setErrores([{ msg: "No se pudo conectar con el servidor" }]);
     }
   };
 
@@ -54,7 +54,16 @@ function Register() {
         <Col>
           <h2>Crear Cuenta</h2>
 
-          {error && <Alert variant="danger">{error}</Alert>}
+          {errores.length > 0 && (
+            <Alert variant="danger">
+              <ul className={styles.errorList}>
+                {errores.map((err, i) => (
+                  <li key={i}>{err.msg}</li>
+                ))}
+              </ul>
+            </Alert>
+          )}
+
 
           <Form onSubmit={handleSubmit}>
 

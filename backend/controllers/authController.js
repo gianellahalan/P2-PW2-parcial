@@ -19,12 +19,12 @@ const login = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ error: 'Credenciales inválidas' });
+      return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
     const passwordOk = await bcrypt.compare(password, user.password);
     if (!passwordOk) {
-      return res.status(401).json({ error: 'Credenciales inválidas' });
+      return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
     // Genera el token del usuario registrado
@@ -63,10 +63,7 @@ const register = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    const error = new Error("Errores de validación");
-    error.status = 400;
-    error.errores = errors.array();
-    return next(error);
+  return res.status(400).json({ errores: errors.array() });
   }
 
   try {
@@ -111,8 +108,8 @@ const validarUsuario = [
     .isLength({ min: 4 }).withMessage("La contraseña debe tener al menos 4 caracteres"),
 
   body("rol")
-  .notEmpty().withMessage("El rol es obligatorio")
-  .isIn(["admin", "cliente"]).withMessage("El rol debe ser 'admin' o 'cliente'"),
+    .notEmpty().withMessage("El rol es obligatorio")
+    .isIn(["admin", "cliente"]).withMessage("El rol debe ser 'admin' o 'cliente'"),
 ];
 
 module.exports = {

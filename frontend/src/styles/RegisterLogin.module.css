@@ -14,7 +14,7 @@
 .registerForm {
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 60%;
     font-size: 15px;
     margin: auto;
     border-radius: 10px;
@@ -59,4 +59,18 @@
     color: rgb(248, 233, 202);
     text-align: center;
     justify-content: center;
+}
+
+.errorList {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+/**---------------------MEDIA 700px---------------------**/
+
+@media (max-width:700px){
+    .registerForm {
+        width: 80%;
+    }
 }
