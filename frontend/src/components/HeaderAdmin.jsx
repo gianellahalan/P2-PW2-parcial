@@ -26,11 +26,6 @@ function HeaderAdmin() {
       </div>
 
       <div id="buscadorymenu">
-        <input
-          type="text"
-          placeholder="Buscar productos o marcas"
-          id="buscador"
-        />
 
         <ul id="nav">
           <li onClick={handleLogout}>
@@ -44,17 +39,18 @@ function HeaderAdmin() {
             </Link>
           </li>
           <li>
-            <Link to="/usuarios">
-              <img src={disco} className="logos" alt="CDs" />
-              <p>Usuarios</p>
-            </Link>
-          </li>
-          <li>
             <Link to="/pedidos">
               <img src={carrito} className="logos" alt="Carrito" />
               <p>Ver pedidos</p>
             </Link>
           </li>
+          <li>
+            <Link to="/usuarios">
+              <img src={disco} className="logos" alt="CDs" />
+              <p>Usuarios</p>
+            </Link>
+          </li>
+
         </ul>
       </div>
     </header>

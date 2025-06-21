@@ -31,37 +31,6 @@ function Productos() {
     }
   }, [termino, productos]);
 
-  const agregarAlCarrito = async (productId) => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      alert("Debes iniciar sesión para agregar al carrito.");
-      return;
-    }
-
-    try {
-      const res = await fetch("http://localhost:3000/api/carrito/agregar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId, cantidad: 1 }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data?.mensaje || "Error al agregar al carrito");
-      }
-
-      alert("Producto agregado al carrito");
-    } catch (error) {
-      console.error("Error al agregar al carrito:", error);
-      alert("No se pudo agregar al carrito");
-    }
-  };
-
   return (
     <div className={styles.productosContainer}>
       {error && <p className={styles.error}>{error}</p>}
@@ -73,10 +42,10 @@ function Productos() {
               <img src={producto.imagen} alt={producto.nombre} className={styles.img} />
               <h3>{producto.nombre}</h3>
               <p>${producto.precio}</p>
+              <button className={styles.boton}>
+                Más información
+              </button>
             </Link>
-            <button className={styles.boton} onClick={() => agregarAlCarrito(producto._id)}>
-              Agregar al carrito
-            </button>
           </div>
         ))}
       </div>

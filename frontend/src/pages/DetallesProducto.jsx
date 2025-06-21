@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom';
 import styles from '../styles/DetallesProducto.module.css';
 
 const DetallesProducto = () => {
+  const [cantidad, setCantidad] = useState(1);
+  const incrementar = () => setCantidad(prev => prev + 1);
+  const decrementar = () => setCantidad(prev => Math.max(1, prev - 1));
+
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [mensaje, setMensaje] = useState('');
@@ -34,32 +38,29 @@ const DetallesProducto = () => {
   }, [id]);
 
   const agregarAlCarrito = async () => {
-    try {
-      const token = localStorage.getItem('token');
+  try {
+    const token = localStorage.getItem('token');
 
-      const response = await fetch("http://localhost:3000/api/carrito/agregar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId: id, cantidad: 1 }),
-      });
+    const response = await fetch("http://localhost:3000/api/carrito/agregar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId: id, cantidad }),
+    });
 
-      if (!response.ok) {
-        throw new Error('Error al agregar al carrito');
-      }
+    if (!response.ok) throw new Error('Error al agregar al carrito');
 
-      const data = await response.json();
-      setMensaje('Producto añadido al carrito correctamente!');
+    setMensaje('Producto añadido al carrito correctamente!');
+    setTimeout(() => setMensaje(''), 3000);
+  } catch (error) {
+    console.error(error);
+    setMensaje('Error al agregar el producto al carrito.');
+    setTimeout(() => setMensaje(''), 3000);
+  }
+};
 
-      setTimeout(() => setMensaje(''), 3000);
-    } catch (error) {
-      console.error(error);
-      setMensaje('Error al agregar el producto al carrito.');
-      setTimeout(() => setMensaje(''), 3000);
-    }
-  };
 
   if (!producto) return <p>Cargando...</p>;
 
@@ -69,18 +70,25 @@ const DetallesProducto = () => {
         <article className={styles.article}>
           <img src={`/${producto.imagen}`} alt={producto.nombre} className={styles.product} />
           <div className={styles.divTransparente}>
-            <p className={styles.p} onClick={agregarAlCarrito} style={{ cursor: 'pointer' }}>Comprar</p>
+            <p className={styles.p}>{producto.nombre}</p>
           </div>
         </article>
 
         <article className={styles.article2}>
           <h1>{producto.nombre}</h1>
-          <p className={styles.precio}>{producto.precio}</p>
+          <p className={styles.precio}>Precio: ${producto.precio}</p>
 
           <h2>Características:</h2>
           <p>{producto.descripcion}</p>
 
-          <div className={styles.boton} onClick={agregarAlCarrito} style={{ cursor: 'pointer' }}>
+          <div className={styles.contador}>
+            <p>Cantidad: </p>
+            <button onClick={decrementar}>-</button>
+            <span>{cantidad}</span>
+            <button onClick={incrementar}>+</button>
+          </div>
+
+          <div className={styles.boton} onClick={agregarAlCarrito}>
             <img src="/img/carrito.png" alt="carrito" />
             <p>Añadir al carrito</p>
           </div>

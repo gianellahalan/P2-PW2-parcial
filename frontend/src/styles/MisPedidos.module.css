@@ -20,6 +20,7 @@
     color: rgb(255, 112, 112);
     background-color: rgb(31, 43, 63); 
     border: none;
+    cursor:pointer;
 }
 
 .cancelar:hover{

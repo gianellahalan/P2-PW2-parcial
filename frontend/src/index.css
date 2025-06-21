@@ -71,9 +71,20 @@ header {
 	flex-wrap: wrap;
 }
 
-#nav li {
-	list-style: none;
+.botonCerrarSesion{
+	background-color: rgb(224, 212, 192);
+	border: none;
+	font-size: 16px;
+	cursor:pointer;
+}
+
+#nav li{
 	border: 1px solid rgb(31, 43, 63);
+	cursor:pointer;
+}
+
+#nav li , .botonCerrarSesion{
+	list-style: none;
 	width: 200px;
 	display: flex;
 	justify-content: center;

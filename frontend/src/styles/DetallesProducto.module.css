@@ -42,7 +42,7 @@
 
 .p{
 	width: 100px;
-	padding: 20px;
+	padding: 10px;
 	border: 1px solid rgb(31, 43, 63);
 	filter: invert();
 	margin: auto;
@@ -50,14 +50,37 @@
 	text-align: center;
 }
 
+.contador {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width:180px;
+  border-radius: 20px;
+}
+
+.contador button {
+  background-color: rgb(224, 212, 192);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.contador span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
 .boton{
 	display: flex;
 	flex-direction: row;
 	border: 1px solid rgb(31, 43, 63);
 	border-radius: 20px;
-	width: 250px;
-	margin: 30px auto;
+	width: 180px;
+	margin: 5px auto;
 	justify-content: center;
+	cursor: pointer;
+	align-items: center;
 }
 
 .boton:hover{
@@ -67,9 +90,9 @@
 }
 
 .boton img{
-	width: 30px;
-	height: 30px;
-	padding: 10px;
+	width: 20px;
+	height: 20px;
+	padding: 6px;
 }
 
 /**---------------------MEDIA 700px---------------------**/
