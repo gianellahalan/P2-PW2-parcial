@@ -1,19 +1,21 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import styles from "../styles/RegisterLogin.module.css";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/authStore";
 
 function Register() {
   useEffect(() => {
-  document.title = "Registrarse";
-}, []);
+    document.title = "Registrarse";
+  }, []);
 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errores, setErrores] = useState([]);
   const navigate = useNavigate();
+
+  const setUserAndToken = useAuthStore((state) => state.setUserAndToken);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +36,7 @@ function Register() {
 
         if (res.ok) {
           localStorage.setItem("token", data.token);
+          setUserAndToken(data.token);
           navigate("/productos");
         } else {
           setErrores(data?.errores || [{ msg: data?.mensaje || "No se pudo registrar" }]);
@@ -64,9 +67,7 @@ function Register() {
             </Alert>
           )}
 
-
           <Form onSubmit={handleSubmit}>
-
             <Form.Group className={styles.labelEinput}>
               <Form.Label className={styles.label}>Nombre completo</Form.Label>
               <Form.Control

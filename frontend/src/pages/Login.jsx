@@ -10,7 +10,7 @@ function Login() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const { setUserAndToken } = useAuthStore();
+  const setUserAndToken = useAuthStore((state) => state.setUserAndToken);
 
   useEffect(() => {
     document.title = "Iniciar sesión";
@@ -41,7 +41,7 @@ function Login() {
       }
 
 
-      setUserAndToken(data.user, data.token);
+      setUserAndToken(data.token);
       localStorage.setItem("token", data.token);
 
       // Validación segura del rol
